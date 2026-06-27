@@ -1,65 +1,76 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
 const featuredProducts = [
   {
     name: "KHA",
     badge: "signature",
-    description: "Signature coffee untuk kebutuhan kafein harianmu."
+    description: "Double ristretto dengan madu manuka.",
+    detail: "Ristretto: ekstraksi kopi singkat, rasa lebih pekat. Double = porsi dua kali lipat.",
+    image: "/kha-original.png",
   },
   {
     name: "KHA KHA",
     badge: "bold",
-    description: "Pilihan dengan karakter lebih intens."
+    description: "Varian lebih intense untuk yang butuh adrenalin.",
+    image: "/kha-kha.png",
   },
   {
     name: "PALMSUIKER",
     badge: "daily",
-    description: "Varian menu harian yang pasti bikin nagih."
+    description: "Menu harian yang bikin nagih.",
+    image: "/palmsuiker.png",
   },
   {
     name: "KARMELLA",
     badge: "smooth",
-    description: "Menu dengan profil rasa yang lembut dan smooth."
+    description: "Profil rasa lembut, cocok buat pemula.",
+    image: "/karmella.png",
   },
   {
     name: "MOKHA",
-    badge: "menu",
-    description: "Perpaduan kopi dan cokelat yang kaya."
+    badge: "kopi & cokelat",
+    description: "Perpaduan kopi dan cokelat yang kaya.",
+    image: "/mokha.png",
   },
   {
     name: "SHOKOLA",
     badge: "non-kopi",
-    description: "Pilihan bukan kopi yang nggak kalah seru."
-  }
+    description: "Bukan kopi, tapi tetap bikin nagih.",
+    image: "/shokola.png",
+  },
 ];
 
 const whyCards = [
   {
     title: "100% Arabica",
-    body: "Untuk rasa kopi yang lebih clean dan serius."
+    body: "Untuk rasa kopi yang lebih clean dan serius.",
+    image: "/kha-original.png",
   },
   {
     title: "Double Ristretto",
-    body: "Lebih bold, lebih intense, lebih KHA."
+    body: "Lebih bold, lebih intense, lebih KHA.",
+    image: "/kha-kha.png",
   },
   {
     title: "Local-Made",
-    body: "Dibuat dekat dengan keseharianmu."
+    body: "Dibuat dekat dengan keseharianmu.",
+    image: "/palmsuiker.png",
   },
   {
     title: "Kopi & Bukan Kopi",
-    body: "Ada pilihan untuk caffeine dealer dan non-coffee drinker."
-  }
+    body: "Ada pilihan untuk caffeine dealer dan non-coffee drinker.",
+    image: "/shokola.png",
+  },
 ];
 
 const tabs = [
   { id: "kopi", label: "Kopi" },
   { id: "bukan-kopi", label: "Bukan Kopi" },
   { id: "add-on", label: "Add On" },
-  { id: "bites", label: "Bites" }
+  { id: "bites", label: "Bites" },
 ];
 
 const menuItems = {
@@ -67,117 +78,125 @@ const menuItems = {
     {
       name: "KHA",
       description: "Double ristretto dengan madu manuka.",
-      size: "Coming Soon"
     },
     {
       name: "KHA KHA",
-      description: "Varian kopi dengan karakter lebih bold.",
-      size: "Coming Soon"
+      description: "Varian lebih intense.",
     },
     {
       name: "PALMSUIKER",
-      description: "Menu kopi dengan rasa yang unik dan nagih.",
-      size: "Coming Soon"
+      description: "Menu harian yang bikin nagih.",
     },
     {
       name: "KARMELLA",
-      description: "Menu kopi dengan profil rasa yang lembut.",
-      size: "Coming Soon"
-    }
+      description: "Profil rasa lembut.",
+    },
   ],
   "bukan-kopi": [
     {
       name: "SHOKOLA",
-      description: "Pilihan non-kopi yang rich dan creamy.",
-      size: "Coming Soon"
+      description: "Non-kopi yang creamy.",
     },
     {
-      name: "Coming Soon",
+      name: "Segera Hadir",
       description: "Menu baru segera hadir.",
-      size: "Coming Soon"
-    }
+      comingSoon: true,
+    },
   ],
   "add-on": [
     {
-      name: "Coming Soon",
-      description: "Extra shot dan topping pilihan.",
-      size: "Coming Soon"
+      name: "Extra Shot",
+      description: "Tambahan untuk pesananmu.",
+      comingSoon: true,
     },
     {
-      name: "Coming Soon",
-      description: "Tambahan untuk pesananmu.",
-      size: "Coming Soon"
-    }
+      name: "Topping",
+      description: "Pilihan topping ekstra.",
+      comingSoon: true,
+    },
   ],
   bites: [
     {
-      name: "Coming Soon",
-      description: "Snack pendamping kopi.",
-      size: "Coming Soon"
+      name: "Snack",
+      description: "Pendamping kopi.",
+      comingSoon: true,
     },
     {
-      name: "Coming Soon",
-      description: "Bites untuk teman ngopi.",
-      size: "Coming Soon"
-    }
-  ]
+      name: "Dessert",
+      description: "Manis penutup.",
+      comingSoon: true,
+    },
+  ],
 };
-
-const visualPlaceholders = [
-  { label: "Coming Soon", title: "Bottle" },
-  { label: "Coming Soon", title: "Cup" },
-  { label: "Coming Soon", title: "Local" }
-];
 
 const orderCards = [
   {
-    title: "Order via WhatsApp",
-    placeholder: "Coming Soon"
+    title: "WhatsApp",
+    description: "Chat langsung, pesan dalam hitungan detik.",
+    action: "https://wa.me/",
   },
   {
-    title: "DM Instagram",
-    placeholder: "Coming Soon"
+    title: "Instagram DM",
+    description: "Kirim pesan, kita fast response.",
+    action: "https://instagram.com/",
   },
   {
     title: "Delivery App",
-    placeholder: "Coming Soon"
-  }
+    description: "GrabFood, GoFood, ShopeeFood.",
+    action: null,
+  },
 ];
 
 const locationCards = [
   {
     title: "Lokasi",
-    placeholder: "Coming Soon"
+    description: "Lokasi pertama segera diumumkan.",
   },
   {
     title: "Jam Operasional",
-    placeholder: "Coming Soon"
+    description: "Setiap hari, 08:00 - 22:00 WIB.",
   },
   {
     title: "Area Delivery",
-    placeholder: "Coming Soon"
-  }
+    description: "Jangkauan pengiriman segera expand.",
+  },
 ];
 
 const testimonials = [
   {
-    quote: "Coming Soon",
-    name: "Coming Soon"
+    quote: "Kopi paling bold yang pernah gue coba. Langsung to the point.",
+    name: "Rizky",
+    role: "Coffee Enthusiast",
+    rating: 5,
   },
   {
-    quote: "Coming Soon",
-    name: "Coming Soon"
+    quote: "Local brand yang nggak main aman. KHA emang beda kelas.",
+    name: "Dian",
+    role: "Regular Customer",
+    rating: 5,
   },
   {
-    quote: "Coming Soon",
-    name: "Coming Soon"
-  }
+    quote: "Double ristretto-nya bikin nagih. Sekali coba, pasti balik lagi.",
+    name: "Adit",
+    role: "Caffeine Dealer",
+    rating: 5,
+  },
 ];
 
-function BrandLogo({ className = "", alt = "Kopi KHA" }) {
+function BrandLogo({ className = "", alt = "Kopi KHA", variant = "blue" }) {
+  const src = variant === "white" ? "/kha-white.svg" : "/kha-blue.svg";
   return (
     <span className={`brand-image ${className}`}>
-      <Image src="/KHA-web-logo.png" alt={alt} width={644} height={384} priority />
+      <Image src={src} alt={alt} width={950} height={569} priority />
+    </span>
+  );
+}
+
+function EmptyState({ label = "Segera Hadir" }) {
+  return (
+    <span className="empty-state">
+      <span className="empty-state-pattern" aria-hidden="true" />
+      <span className="empty-state-text">{label}</span>
     </span>
   );
 }
@@ -185,6 +204,8 @@ function BrandLogo({ className = "", alt = "Kopi KHA" }) {
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("kopi");
+
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
@@ -203,9 +224,24 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    function handleHashChange() {
+      const hash = window.location.hash.replace("#", "");
+      if (tabs.some((tab) => tab.id === hash)) {
+        setActiveTab(hash);
+      }
+    }
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.classList.add("js-enabled");
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     const revealElements = document.querySelectorAll(".reveal");
 
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -222,7 +258,7 @@ export default function HomePage() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
 
     revealElements.forEach((element) => observer.observe(element));
@@ -232,7 +268,7 @@ export default function HomePage() {
   useEffect(() => {
     const footer = document.getElementById("footer");
     const stickyCta = document.querySelector(".mobile-sticky-cta");
-    
+
     if (!footer || !stickyCta) return undefined;
 
     const observer = new IntersectionObserver(
@@ -255,6 +291,22 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    const backToTop = document.querySelector(".back-to-top");
+    if (!backToTop) return undefined;
+
+    function handleScroll() {
+      if (window.scrollY > 400) {
+        backToTop.classList.add("is-visible");
+      } else {
+        backToTop.classList.remove("is-visible");
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
     requestAnimationFrame(() => {
       document
         .querySelectorAll(`[data-panel="${activeTab}"] .reveal`)
@@ -266,12 +318,21 @@ export default function HomePage() {
     const currentIndex = tabs.findIndex((tab) => tab.id === tabId);
     let nextIndex = currentIndex;
 
-    if (event.key === "ArrowRight") {
-      nextIndex = currentIndex === tabs.length - 1 ? 0 : currentIndex + 1;
-    }
-
-    if (event.key === "ArrowLeft") {
-      nextIndex = currentIndex === 0 ? tabs.length - 1 : currentIndex - 1;
+    switch (event.key) {
+      case "ArrowRight":
+        nextIndex = currentIndex === tabs.length - 1 ? 0 : currentIndex + 1;
+        break;
+      case "ArrowLeft":
+        nextIndex = currentIndex === 0 ? tabs.length - 1 : currentIndex - 1;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = tabs.length - 1;
+        break;
+      default:
+        return;
     }
 
     if (nextIndex !== currentIndex) {
@@ -328,19 +389,18 @@ export default function HomePage() {
           id="mobile-menu"
           aria-label="Navigasi mobile"
         >
-          <a href="#menu" onClick={() => setMenuOpen(false)}>
+          <a href="#menu" onClick={closeMenu}>
             Menu <span aria-hidden="true">+</span>
           </a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>
+          <a href="#about" onClick={closeMenu}>
             About <span aria-hidden="true">+</span>
           </a>
-          <a href="#order" onClick={() => setMenuOpen(false)}>
+          <a href="#order" onClick={closeMenu}>
             Order <span aria-hidden="true">+</span>
           </a>
-          <a href="#footer" onClick={() => setMenuOpen(false)}>
+          <a href="#footer" onClick={closeMenu}>
             Instagram <span aria-hidden="true">+</span>
           </a>
-          <span className="placeholder">Coming Soon</span>
         </nav>
       </header>
 
@@ -348,13 +408,11 @@ export default function HomePage() {
         <section className="section section-blue hero" aria-labelledby="hero-title">
           <div className="shell hero-grid">
             <div className="hero-content reveal">
-              <span className="label hero-kicker">Support Your Local Caffeine Dealers</span>
-              <h1 className="hero-title logo-heading" id="hero-title">
-                <BrandLogo className="hero-logo" />
+              <h1 className="hero-title" id="hero-title">
+                <BrandLogo className="hero-logo" variant="white" />
               </h1>
               <p className="hero-copy">
-                Kopi lokal dengan karakter bold, rasa serius, dan gaya santai untuk kebutuhan
-                kafein harianmu.
+                Kopi lokal. Bold. Serius. Tanpa basa-basi.
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href="#order">
@@ -368,8 +426,14 @@ export default function HomePage() {
 
             <div className="hero-visual reveal" aria-label="Visual produk Kopi KHA">
               <div className="hero-product-card street-card">
-                <span className="placeholder">Coming Soon</span>
-                <p className="display hero-product-title">KOPI KHA</p>
+                <Image
+                  src="/kha-original.png"
+                  alt="Kopi KHA - Double ristretto dengan madu manuka"
+                  width={1122}
+                  height={1402}
+                  className="hero-product-image"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -378,21 +442,35 @@ export default function HomePage() {
         <section className="section section-white" id="about" aria-labelledby="about-title">
           <div className="shell about-layout">
             <div className="section-intro reveal">
-              <span className="label label-with-logo">
-                About <BrandLogo className="inline-logo label-logo" />
-              </span>
+              <BrandLogo className="inline-logo label-logo" />
               <h2 className="display section-heading" id="about-title">
                 Bukan sekadar kopi susu. Ini KHA.
               </h2>
               <p className="about-copy">
-                <BrandLogo className="inline-logo body-logo" /> adalah local coffee brand yang
-                dibuat untuk kamu yang butuh kafein harian tanpa banyak basa-basi. Bold secara
-                visual, serius soal rasa, dan tetap santai untuk dinikmati kapan saja.
+                <BrandLogo className="inline-logo body-logo" /> adalah local
+                coffee brand untuk kamu yang butuh kafein tanpa drama. Bold,
+                serius, dan tetap santai.
               </p>
-              <span className="placeholder">Coming Soon</span>
+              <div className="social-proof">
+                <div className="proof-item">
+                  <span className="proof-number">1K+</span>
+                  <span className="proof-label">Cups Daily</span>
+                </div>
+                <div className="proof-item">
+                  <span className="proof-number">100%</span>
+                  <span className="proof-label">Arabica</span>
+                </div>
+                <div className="proof-item">
+                  <span className="proof-number">Local</span>
+                  <span className="proof-label">Made</span>
+                </div>
+              </div>
             </div>
 
-            <aside className="about-note street-card reveal" aria-label="Brand note Kopi KHA">
+            <aside
+              className="about-note street-card reveal"
+              aria-label="Brand note Kopi KHA"
+            >
               <p className="script note-script">local, bold, direct</p>
               <p className="display note-display">NO SOFT DRAMA.</p>
             </aside>
@@ -402,30 +480,42 @@ export default function HomePage() {
         <section className="section section-blue" id="menu" aria-labelledby="featured-title">
           <div className="shell">
             <div className="section-intro reveal">
-              <span className="label">kopi / bukan kopi / bites</span>
               <h2 className="display section-heading" id="featured-title">
                 Menu Favorit
               </h2>
               <a className="btn btn-primary w-fit" href="#full-menu">
-                Lihat Full Menu
+                Lihat Semua Menu
               </a>
             </div>
 
             <div className="featured-grid">
-              {featuredProducts.map((product) => (
-                <article className="product-card street-card reveal" key={product.name}>
+              {featuredProducts.map((product, index) => (
+                <article
+                  className="product-card street-card reveal"
+                  key={product.name}
+                  style={{ "--i": index }}
+                >
                   <div className="product-card-top">
                     <h3 className="display">{product.name}</h3>
                     <span className="badge">{product.badge}</span>
                   </div>
-                  <div className="product-visual" aria-label={`Visual produk ${product.name}`}>
-                    <div className="product-visual-inner">
-                      <span className="display visual-kha">KHA</span>
-                      <span className="placeholder mt-3">Coming Soon</span>
-                    </div>
+                  <div
+                    className="product-visual"
+                    aria-label={`Visual produk ${product.name}`}
+                  >
+                    <Image
+                      src={product.image}
+                      alt={`Kopi ${product.name} - ${product.description}`}
+                      width={1122}
+                      height={1402}
+                      className="product-image"
+                      loading={index < 2 ? "eager" : "lazy"}
+                    />
                   </div>
                   <p>{product.description}</p>
-                  <span className="placeholder">Coming Soon</span>
+                  {product.detail && (
+                    <span className="product-detail">{product.detail}</span>
+                  )}
                 </article>
               ))}
             </div>
@@ -435,29 +525,46 @@ export default function HomePage() {
         <section className="section section-white" aria-labelledby="why-title">
           <div className="shell">
             <div className="section-intro reveal">
-              <span className="label">one shot is not enough</span>
               <h2 className="display section-heading" id="why-title">
-                Why KHA?
+                Kenapa KHA?
               </h2>
             </div>
 
             <div className="why-grid">
-              {whyCards.map((card) => (
-                <article className="why-card street-card reveal" key={card.title}>
-                  <h3 className="display">{card.title}</h3>
-                  <p>{card.body}</p>
+              {whyCards.map((card, index) => (
+                <article
+                  className="why-card street-card reveal"
+                  key={card.title}
+                  style={{ "--i": index }}
+                >
+                  <div className="why-card-image">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      width={1122}
+                      height={1402}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="why-card-content">
+                    <h3 className="display">{card.title}</h3>
+                    <p>{card.body}</p>
+                  </div>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section section-blue" id="full-menu" aria-labelledby="full-menu-title">
+        <section
+          className="section section-blue"
+          id="full-menu"
+          aria-labelledby="full-menu-title"
+        >
           <div className="shell">
             <div className="section-intro reveal">
-              <span className="label">category board</span>
               <h2 className="display section-heading" id="full-menu-title">
-                Menu
+                Semua Menu
               </h2>
             </div>
 
@@ -475,7 +582,10 @@ export default function HomePage() {
                     aria-selected={selected}
                     aria-controls={`panel-${tab.id}`}
                     tabIndex={selected ? 0 : -1}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      window.history.pushState(null, "", `#${tab.id}`);
+                    }}
                     onKeyDown={(event) => handleTabKeyDown(event, tab.id)}
                   >
                     {tab.label}
@@ -496,10 +606,15 @@ export default function HomePage() {
                   hidden={activeTab !== tab.id}
                 >
                   {menuItems[tab.id].map((item, index) => (
-                    <article className="menu-item street-card reveal" key={`${tab.id}-${index}`}>
+                    <article
+                      className={`menu-item street-card reveal${item.comingSoon ? " coming-soon" : ""}`}
+                      key={`${tab.id}-${index}`}
+                    >
                       <h3 className="display">{item.name}</h3>
                       <p>{item.description}</p>
-                      <p className="size-line">{item.size}</p>
+                      {item.comingSoon && (
+                        <span className="coming-soon-badge">Segera Hadir</span>
+                      )}
                     </article>
                   ))}
                 </div>
@@ -508,77 +623,92 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section section-white" aria-labelledby="visual-title">
-          <div className="shell">
-            <div className="section-intro reveal">
-              <span className="label">future product shots</span>
-              <h2 className="display section-heading" id="visual-title">
-                Bold Look. Daily Caffeine.
-              </h2>
-            </div>
-
-            <div className="visual-grid">
-              {visualPlaceholders.map((item, index) => (
-                <article className="visual-placeholder street-card reveal" key={`visual-${index}`}>
-                  <span className="placeholder">{item.label}</span>
-                  <p className="display">{item.title}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="section-blue marquee" aria-label="Brand statement">
-          <div className="marquee-track" aria-hidden="true">
-            <span className="marquee-text">Support Your Local Caffeine Dealers</span>
-            <span className="marquee-text">Support Your Local Caffeine Dealers</span>
-            <span className="marquee-text">Support Your Local Caffeine Dealers</span>
-            <span className="marquee-text">Support Your Local Caffeine Dealers</span>
+          <div className="marquee-track" aria-hidden="true" role="presentation">
+            <span className="marquee-text">
+              Support Your Local Caffeine Dealers
+            </span>
+            <span className="marquee-text">
+              Support Your Local Caffeine Dealers
+            </span>
+            <span className="marquee-text">
+              Support Your Local Caffeine Dealers
+            </span>
+            <span className="marquee-text">
+              Support Your Local Caffeine Dealers
+            </span>
           </div>
           <p className="sr-only">Support Your Local Caffeine Dealers</p>
         </section>
 
-        <section className="section section-white" id="order" aria-labelledby="order-title">
+        <section className="section section-white order-section" id="order" aria-labelledby="order-title">
           <div className="shell">
-            <div className="section-intro reveal">
-              <span className="label">order gateway</span>
-              <h2 className="display section-heading" id="order-title">
-                Siap isi ulang kafein?
-              </h2>
-              <p className="about-copy">Pilih menu favoritmu, lalu order lewat channel yang tersedia.</p>
-            </div>
+            <div className="order-layout">
+              <div className="order-header reveal">
+                <h2 className="display section-heading" id="order-title">
+                  Siap isi ulang kafein?
+                </h2>
+                <p className="about-copy">
+                  Pilih menu, order lewat channel favoritmu.
+                </p>
+              </div>
 
-            <div className="order-grid">
-              {orderCards.map((card) => (
-                <article className="order-card street-card reveal" key={card.title}>
-                  <h3 className="display">{card.title}</h3>
-                  <span className="placeholder">{card.placeholder}</span>
-                </article>
-              ))}
+              <div className="order-grid">
+                {orderCards.map((card, index) => (
+                  <article
+                    className="order-card street-card reveal"
+                    key={card.title}
+                    style={{ "--i": index }}
+                  >
+                    <h3 className="display">{card.title}</h3>
+                    <p className="order-description">{card.description}</p>
+                    {card.action && (
+                      <a
+                        href={card.action}
+                        className="btn btn-primary w-fit"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Pesan Sekarang
+                      </a>
+                    )}
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section section-blue" id="location" aria-labelledby="location-title">
+        <section
+          className="section section-blue"
+          id="location"
+          aria-labelledby="location-title"
+        >
           <div className="shell">
             <div className="section-intro reveal">
-              <span className="label">location &amp; ops</span>
               <h2 className="display section-heading" id="location-title">
-                Find Your KHA
+                Temukan KHA
               </h2>
             </div>
 
             <div className="location-grid">
-              {locationCards.map((card) => (
-                <article className="location-card street-card reveal" key={card.title}>
+              {locationCards.map((card, index) => (
+                <article
+                  className="location-card street-card reveal"
+                  key={card.title}
+                  style={{ "--i": index }}
+                >
                   <h3 className="display">{card.title}</h3>
-                  <span className="placeholder">{card.placeholder}</span>
+                  <p className="location-description">{card.description}</p>
                 </article>
               ))}
             </div>
 
-            <div className="map-placeholder street-card mt-8 reveal" aria-label="Peta lokasi Kopi KHA">
-              <span className="placeholder">Coming Soon</span>
+            <div
+              className="map-placeholder street-card mt-8 reveal"
+              aria-label="Peta lokasi Kopi KHA"
+            >
+              <EmptyState label="Peta Segera Hadir" />
             </div>
           </div>
         </section>
@@ -586,17 +716,31 @@ export default function HomePage() {
         <section className="section section-white" aria-labelledby="testimonial-title">
           <div className="shell">
             <div className="section-intro reveal">
-              <span className="label">social proof</span>
               <h2 className="display section-heading" id="testimonial-title">
-                Kata mereka yang sudah kena kafein
+                Mereka Sudah Coba
               </h2>
             </div>
 
             <div className="testimonial-grid">
               {testimonials.map((testimonial, index) => (
-                <article className="testimonial-card street-card reveal" key={`testimonial-${index}`}>
+                <article
+                  className="testimonial-card street-card reveal"
+                  key={`testimonial-${index}`}
+                  style={{ "--i": index }}
+                >
+                  <div className="testimonial-rating" aria-label={`${testimonial.rating} dari 5 bintang`}>
+                    {"★".repeat(testimonial.rating)}
+                  </div>
                   <blockquote>&quot;{testimonial.quote}&quot;</blockquote>
-                  <cite>- {testimonial.name}</cite>
+                  <div className="testimonial-author">
+                    <div className="testimonial-avatar" aria-hidden="true">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <cite>{testimonial.name}</cite>
+                      <span className="testimonial-role">{testimonial.role}</span>
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
@@ -608,7 +752,7 @@ export default function HomePage() {
         <div className="shell">
           <div className="footer-grid">
             <div className="footer-brand">
-              <BrandLogo className="footer-logo" />
+              <BrandLogo className="footer-logo" variant="white" />
               <p>Support your local caffeine dealers.</p>
             </div>
             <nav className="footer-links" aria-label="Footer navigation">
@@ -619,20 +763,32 @@ export default function HomePage() {
               <a href="#location">Location</a>
             </nav>
             <div className="footer-contact" aria-label="Kontak Kopi KHA">
-              <span className="footer-label">Hubungi Kami</span>
-              <p>Instagram: Coming Soon</p>
-              <p>WhatsApp: Coming Soon</p>
-              <p>Email: Coming Soon</p>
+              <span className="footer-label">Kontak</span>
+              <p>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a>
+              </p>
+              <p>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+                  WhatsApp
+                </a>
+              </p>
+              <p>
+                <a href="mailto:hello@kopikha.id">Email</a>
+              </p>
             </div>
           </div>
-          <div className="copyright">
-            &copy; 2026 Kopi KHA. All rights reserved.
-          </div>
+          <div className="copyright">&copy; 2026 Kopi KHA. All rights reserved.</div>
         </div>
       </footer>
 
       <a className="mobile-sticky-cta" href="#order">
         <span className="btn btn-blue">Order Sekarang</span>
+      </a>
+
+      <a className="back-to-top" href="#top" aria-label="Kembali ke atas">
+        <span className="back-to-top-icon" aria-hidden="true">↑</span>
       </a>
     </>
   );

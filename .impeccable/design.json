@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-27T00:00:00Z",
+  "title": "Design System: Kopi KHA",
+  "extensions": {
+    "colorMeta": {
+      "primary-blue": {
+        "role": "primary",
+        "displayName": "Bold Blue",
+        "canonical": "#004AAD",
+        "tonalRamp": ["#001E3D", "#002B57", "#00357F", "#004AAD", "#1A6AC4", "#4D94E0", "#8FC1F0", "#D6E8FA"]
+      },
+      "primary-deep": {
+        "role": "primary-deep",
+        "displayName": "Deep Blue",
+        "canonical": "#00357F",
+        "tonalRamp": ["#001533", "#001E4A", "#002B57", "#00357F", "#004AAD", "#1A6AC4", "#4D94E0", "#8FC1F0"]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "#FFFDE8",
+        "tonalRamp": ["#E6E0C0", "#EDE8D0", "#F5F2E0", "#FFFDE8", "#FFFEF2", "#FFFFF8", "#FFFFFB", "#FFFFFE"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["#E0E0E0", "#C8C8C8", "#B0B0B0", "#989898", "#808080", "#686868", "#505050", "#383838"]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Black",
+        "canonical": "#111111",
+        "tonalRamp": ["#000000", "#050505", "#0A0A0A", "#111111", "#1A1A1A", "#252525", "#333333", "#444444"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines, section headings, product names. Always uppercase, always dominant."
+      },
+      "script": {
+        "displayName": "Script",
+        "purpose": "Accent phrases, brand notes. Used once or twice per page maximum."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descriptions, copy, navigation. Readable, no competing with display."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges, kickers, small UI text. Uppercase, bold, tight."
+      }
+    },
+    "shadows": [
+      { "name": "small", "value": "4px 4px 0 #111111", "purpose": "Buttons, small cards, interactive elements." },
+      { "name": "medium", "value": "5px 5px 0 #111111", "purpose": "Standard cards, menu items." },
+      { "name": "large", "value": "6px 6px 0 #111111", "purpose": "Hero cards, featured elements." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "ease", "purpose": "Default easing for state transitions." },
+      { "name": "duration-fast", "value": "180ms", "purpose": "Quick interactions: hover, active, focus." },
+      { "name": "duration-reveal", "value": "420ms", "purpose": "Scroll-triggered entrance animations." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1180px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA. White background, blue text, hard shadow.",
+      "html": "<button class=\"ds-btn-primary\">ORDER NOW</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 18px; color: #004AAD; background: #FFFFFF; border: 3px solid #111111; box-shadow: 4px 4px 0 #111111; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; line-height: 1; text-transform: uppercase; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; } .ds-btn-primary:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #111111; } .ds-btn-primary:active { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #111111; } .ds-btn-primary:focus-visible { outline: 4px solid #FFFDE8; outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary CTA. Deep blue background, white text.",
+      "html": "<button class=\"ds-btn-secondary\">LEARN MORE</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 18px; color: #FFFFFF; background: #00357F; border: 3px solid #111111; box-shadow: 4px 4px 0 #111111; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; line-height: 1; text-transform: uppercase; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; } .ds-btn-secondary:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #111111; } .ds-btn-secondary:active { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #111111; } .ds-btn-secondary:focus-visible { outline: 4px solid #FFFDE8; outline-offset: 4px; }"
+    },
+    {
+      "name": "Street Card",
+      "kind": "card",
+      "refersTo": "street-card",
+      "description": "Standard container. White or blue background, black border, hard shadow.",
+      "html": "<div class=\"ds-street-card\"><h3 class=\"ds-display\">CARD TITLE</h3><p>Card content goes here.</p></div>",
+      "css": ".ds-street-card { display: grid; gap: 16px; padding: 20px; color: #004AAD; background: #FFFFFF; border: 2px solid #111111; box-shadow: 5px 5px 0 #111111; } .ds-street-card.ds-blue { color: #FFFFFF; background: #004AAD; } .ds-display { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 36px; line-height: 1; text-transform: uppercase; margin: 0; }"
+    },
+    {
+      "name": "Tab Button",
+      "kind": "button",
+      "refersTo": "tab-button",
+      "description": "Menu category selector. Full-width stack, Anton typography.",
+      "html": "<button class=\"ds-tab-button\" aria-selected=\"true\">KOPI</button>",
+      "css": ".ds-tab-button { min-height: 48px; padding: 12px 16px; color: #FFFFFF; background: #00357F; border: 2px solid #FFFFFF; box-shadow: 4px 4px 0 #111111; font-family: 'Anton', Impact, sans-serif; font-size: 20px; line-height: 1; text-align: center; text-transform: uppercase; cursor: pointer; transition: background-color 180ms ease, color 180ms ease; } .ds-tab-button[aria-selected='true'] { color: #004AAD; background: #FFFFFF; border-color: #111111; } .ds-tab-button:focus-visible { outline: 4px solid #FFFDE8; outline-offset: 4px; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Small label for product categories. Blue background, white text.",
+      "html": "<span class=\"ds-badge\">SIGNATURE</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; padding: 5px 8px; color: #FFFFFF; background: #004AAD; border: 2px solid #111111; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 800; line-height: 1; text-transform: uppercase; }"
+    },
+    {
+      "name": "Kicker Label",
+      "kind": "chip",
+      "refersTo": "label",
+      "description": "Section eyebrow. Uppercase, bold, pill-shaped border.",
+      "html": "<span class=\"ds-kicker\">SECTION NAME</span>",
+      "css": ".ds-kicker { display: inline-flex; align-items: center; min-height: 32px; padding: 6px 12px; border: 2px solid currentColor; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; line-height: 1; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bold Local",
+    "overview": "This system is built for a local coffee brand that doesn't apologize for being direct. Every visual choice reinforces the 'no soft drama' attitude — strong type, sharp contrasts, confident layout. The design feels rooted in its Indonesian context, not imported from a global template.",
+    "keyCharacteristics": [
+      "Hard shadows and sharp edges — no soft blur, no rounded corners on cards",
+      "Bold uppercase display type in Anton — dominates every section",
+      "Blue-and-white palette with cream accents — simple, high-contrast, memorable",
+      "Street-level energy — feels like a hand-painted sign, not a corporate brand"
+    ],
+    "rules": [
+      { "name": "The Tight Palette Rule", "body": "Five colors total. No sixth accent, no gradient, no tint. The constraint IS the identity.", "section": "colors" },
+      { "name": "The Blue Dominance Rule", "body": "Blue appears on 40-60% of any given screen. It's not an accent — it's the surface.", "section": "colors" },
+      { "name": "The Anton Rule", "body": "Anton is for headlines only. Never use it for body text, buttons, or labels. Its power comes from restraint.", "section": "typography" },
+      { "name": "The One Script Rule", "body": "Caveat appears once per section at most. Two script accents on the same screen kills the effect.", "section": "typography" },
+      { "name": "The No Blur Rule", "body": "Shadows never use blur radius. If it has blur, it's not KHA.", "section": "elevation" },
+      { "name": "The Offset Rule", "body": "Shadow offset is always equal in X and Y (4px 4px, 5px 5px, 6px 6px). Uneven offsets feel accidental.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use hard shadows with zero blur on every card and button.",
+      "Do keep the palette to five colors maximum.",
+      "Do use Anton for headlines and nothing else.",
+      "Do make borders visible (2px minimum) on all structural elements.",
+      "Do use uppercase for all display type and labels.",
+      "Do maintain the bold, direct voice in all copy."
+    ],
+    "donts": [
+      "Don't use rounded corners on cards or sections. Sharp edges only. Pill shape is for badges and labels.",
+      "Don't add blur to shadows. No ambient glow, no soft elevation.",
+      "Don't introduce gradients. Flat color only.",
+      "Don't use muted grays or pastels. The palette is bold or it's nothing.",
+      "Don't make it mainstream. This already has 'bold' character — don't dilute it into safe/neutral territory.",
+      "Don't pair Anton with another condensed sans-serif. It stands alone.",
+      "Don't use Caveat more than once per section."
+    ]
+  }
+}
