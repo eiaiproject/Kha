@@ -2,7 +2,11 @@ node_modules
 .next
 out
 .vercel
+.wrangler
 *.log
 .eslintcache
 .env*.local
 .DS_Store
+.impeccable
+DESIGN.md
+PRODUCT.md

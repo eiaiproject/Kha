@@ -28,8 +28,8 @@ export const metadata = {
     template: "%s | Kopi KHA",
   },
   description:
-    "Kopi lokal dengan karakter bold, rasa serius, dan gaya santai untuk kebutuhan kafein harianmu. Order sekarang!",
-  keywords: ["kopi", "coffee", "local", "Indonesia", "kopi susu", "KHA"],
+    "Kopi lokal dengan karakter bold, rasa serius, dan gaya santai untuk kebutuhan kafein harianmu. Double ristretto, rasa bold, dibuat lokal.",
+  keywords: ["kopi", "coffee", "local", "Indonesia", "kopi susu", "KHA", "bold coffee"],
   authors: [{ name: "Kopi KHA" }],
   openGraph: {
     type: "website",
@@ -43,7 +43,7 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Kopi KHA",
+        alt: "Kopi KHA — Kopi lokal bold Indonesia",
       },
     ],
   },
@@ -73,10 +73,6 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="id" className={`${anton.variable} ${caveat.variable} ${spaceGrotesk.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
       <body>{children}</body>
     </html>
   );
