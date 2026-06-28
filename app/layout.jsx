@@ -55,7 +55,7 @@ export const metadata = {
     images: ["/og-image.png"],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/kha-white.svg",
   },
   robots: {
     index: true,
